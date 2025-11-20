@@ -25,34 +25,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install build2 on Linux
+      - name: Setup Homebrew (Linux)
         if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gnupg ca-certificates
-          echo 'deb [trusted=yes] https://download.build2.org/apt stable main' | sudo tee /etc/apt/sources.list.d/build2.list
-          sudo apt-get update
-          sudo apt-get install -y build2
+        uses: Homebrew/actions/setup-homebrew@v4
 
-      - name: Install build2 on macOS
-        if: runner.os == 'macOS'
+      - name: Show Homebrew info
+        run: |
+          which brew || echo "brew not in PATH"
+          brew --version
+
+      - name: Install build2 via Homebrew
         run: |
           brew update
           brew install build2
 
-      - name: Show versions
+      - name: Show tool versions
         run: |
           b --version
-          $CC --version
           $CXX --version
+
+      - name: Setup
+        run: |
+          make setup
 
       - name: Configure
         run: |
-          mkdir -p .build2
-          b configure:./.build2 \
-            config.cxx="$CXX" \
-            config.cxx.std=c++20
+          make config
 
       - name: Build
         run: |
-          b test:./.build2
+          make build
+
+      - name: Test
+        run: |
+          make test
