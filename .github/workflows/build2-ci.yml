@@ -27,7 +27,7 @@ jobs:
 
       - name: Setup Homebrew (Linux)
         if: runner.os == 'Linux'
-        uses: Homebrew/actions/setup-homebrew@v4
+        uses: Homebrew/actions/setup-homebrew@master
 
       - name: Show Homebrew info
         run: |
