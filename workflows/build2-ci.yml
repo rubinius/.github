@@ -1,0 +1,59 @@
+name: Build2 CI
+
+on:
+  workflow_call:
+    inputs:
+      build-target:
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: build2 (${{ matrix.os }}, ${{ matrix.compiler }})
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    env:
+      CC: clang
+      CXX: clang++
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        run: echo "Building ${{ inputs.build-target }}"
+
+      - name: Install build2 on Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gnupg ca-certificates
+          echo 'deb [trusted=yes] https://download.build2.org/apt stable main' | sudo tee /etc/apt/sources.list.d/build2.list
+          sudo apt-get update
+          sudo apt-get install -y build2
+
+      - name: Install build2 on macOS
+        if: runner.os == 'macOS'
+        run: |
+          brew update
+          brew install build2
+
+      - name: Show versions
+        run: |
+          b --version
+          $CC --version
+          $CXX --version
+
+      - name: Configure (out-of-source)
+        run: |
+          mkdir -p .build2
+          b configure:./.build2 \
+            config.cxx=$CXX \
+            config.cxx.std=c++20
+
+      - name: Build
+        run: |
+          b test:./.build2
