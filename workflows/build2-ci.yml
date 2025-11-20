@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: build2 (${{ matrix.os }}, ${{ matrix.compiler }})
+    name: build2 (${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -24,7 +24,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        run: echo "Building ${{ inputs.build-target }}"
 
       - name: Install build2 on Linux
         if: runner.os == 'Linux'
@@ -47,11 +46,11 @@ jobs:
           $CC --version
           $CXX --version
 
-      - name: Configure (out-of-source)
+      - name: Configure
         run: |
           mkdir -p .build2
           b configure:./.build2 \
-            config.cxx=$CXX \
+            config.cxx="$CXX" \
             config.cxx.std=c++20
 
       - name: Build
