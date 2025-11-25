@@ -22,3 +22,87 @@ jobs:
         with:
           project-url: https://github.com/orgs/rubinius/projects/2
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+      - name: Ruby Support
+        if: >
+          (github.event_name == 'issues' &&
+           (contains(join(github.event.issue.labels.*.name, ','), 'ruby')))
+          ||
+          (github.event_name == 'pull_request' &&
+           (contains(join(github.event.pull_request.labels.*.name, ','), 'ruby')))
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/rubinius/projects/8
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+      - name: Build System & Packaging
+        if: >
+          (github.event_name == 'issues' &&
+           (contains(join(github.event.issue.labels.*.name, ','), 'build')))
+          ||
+          (github.event_name == 'pull_request' &&
+           (contains(join(github.event.pull_request.labels.*.name, ','), 'build')))
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/rubinius/projects/7
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+      - name: Contributions, Documentation & Social Media
+        if: >
+          (github.event_name == 'issues' &&
+           (contains(join(github.event.issue.labels.*.name, ','), 'social')))
+          ||
+          (github.event_name == 'pull_request' &&
+           (contains(join(github.event.pull_request.labels.*.name, ','), 'social')))
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/rubinius/projects/1
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+      - name: Heaps & Garbage Collection
+        if: >
+          (github.event_name == 'issues' &&
+           (contains(join(github.event.issue.labels.*.name, ','), 'gc')))
+          ||
+          (github.event_name == 'pull_request' &&
+           (contains(join(github.event.pull_request.labels.*.name, ','), 'gc')))
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/rubinius/projects/3
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+      - name: Parsers & PEGs
+        if: >
+          (github.event_name == 'issues' &&
+           (contains(join(github.event.issue.labels.*.name, ','), 'parser')))
+          ||
+          (github.event_name == 'pull_request' &&
+           (contains(join(github.event.pull_request.labels.*.name, ','), 'parser')))
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/rubinius/projects/4
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+      - name: CodeDB & IPFS/Noria
+        if: >
+          (github.event_name == 'issues' &&
+           (contains(join(github.event.issue.labels.*.name, ','), 'codedb')))
+          ||
+          (github.event_name == 'pull_request' &&
+           (contains(join(github.event.pull_request.labels.*.name, ','), 'codedb')))
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/rubinius/projects/5
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+      - name: Concurrency & Performance
+        if: >
+          (github.event_name == 'issues' &&
+           (contains(join(github.event.issue.labels.*.name, ','), 'performance')))
+          ||
+          (github.event_name == 'pull_request' &&
+           (contains(join(github.event.pull_request.labels.*.name, ','), 'performance')))
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/rubinius/projects/6
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
