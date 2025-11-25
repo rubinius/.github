@@ -1,0 +1,21 @@
+name: Add issues & pull-requests to projects by label
+
+on:
+  workflow_call:
+
+jobs:
+  projects:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: LLVM-based Compiler
+        if: >
+          (github.event_name == 'issues' &&
+           (contains(join(github.event.issue.labels.*.name, ','), 'compiler')))
+          ||
+          (github.event_name == 'pull_request' &&
+           (contains(join(github.event.pull_request.labels.*.name, ','), 'compiler')))
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/rubinius/projects/2
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
