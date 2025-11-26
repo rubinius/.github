@@ -1,0 +1,42 @@
+[
+  {
+    "label": "compiler",
+    "color": "0052cc",
+    "description": "Work related to the LLVM-based compiler."
+  },
+  {
+    "label": "ruby",
+    "color": "e99695",
+    "description": "Work related to Ruby libraries."
+  },
+  {
+    "label": "build",
+    "color": "afa93e",
+    "description": "Work related to the build system and packaging."
+  },
+  {
+    "label": "social",
+    "color": "e4b03f",
+    "description": "Work related to contributions, documentation, and social media."
+  },
+  {
+    "label": "gc",
+    "color": "1ec8ee",
+    "description": "Work related to memory and garbage collection."
+  },
+  {
+    "label": "parser",
+    "color": "42fbdf",
+    "description": "Work related to parsing and parsers."
+  },
+  {
+    "label": "codedb",
+    "color": "ba90a5",
+    "description": "Work related to the CodeDB and code distribution."
+  },
+  {
+    "label": "performance",
+    "color": "051f7f",
+    "description": "Work related to concurrency and performance."
+  }
+]
